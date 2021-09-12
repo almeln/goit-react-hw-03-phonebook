@@ -63,6 +63,7 @@ class App extends Component {
         }));
     };
 
+    // Фазы жизненного цикла
     componentDidMount() {
         console.log('App componentDidMount');
 
@@ -75,24 +76,29 @@ class App extends Component {
         };
     };
 
+    // Фазы жизненного цикла
     componentDidUpdate(prevProps, prevState) {
+        const { contacts } = this.state;
+
         console.log('App componentDidUpdate');
         // До обновления
         console.log('prevState', prevState);
         // После обновления
         console.log('state', this.state);
 
-        if (this.state.contacts !== prevState.contacts) {
+        if (contacts !== prevState.contacts) {
             console.log('Обновилось поле контактов, записываю контакты в хранилище');
 
-            localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+            localStorage.setItem('contacts', JSON.stringify(contacts));
         };
     }
 
     render() {
-        console.log('App render');
         const { formSubmitHandler, changeFilter, deleteContact, getVisibleContacts } = this;
         const visibleContacts = getVisibleContacts();
+
+        // Фазы жизненного цикла
+        console.log('App render');
 
         return (
             <Container>
