@@ -16,6 +16,36 @@ class App extends Component {
         filter: ''
     }
 
+    // Фазы жизненного цикла
+    componentDidMount() {
+        console.log('App componentDidMount');
+
+        const contacts = localStorage.getItem('contacts');
+        const parsedContacts = JSON.parse(contacts);
+
+        if (parsedContacts) {
+            console.log(parsedContacts);
+            this.setState({ contacts: parsedContacts });
+        };
+    };
+
+    // Фазы жизненного цикла
+    componentDidUpdate(prevProps, prevState) {
+        const { contacts } = this.state;
+
+        console.log('App componentDidUpdate');
+        // До обновления
+        console.log('prevState', prevState);
+        // После обновления
+        console.log('state', this.state);
+
+        if (contacts !== prevState.contacts) {
+            console.log('Обновилось поле контактов, записываю контакты в хранилище');
+
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+        };
+    }
+
     formSubmitHandler = data => {
         console.log(data);
 
@@ -62,36 +92,6 @@ class App extends Component {
             contacts: prevState.contacts.filter(contact => contact.id !== contactId)
         }));
     };
-
-    // Фазы жизненного цикла
-    componentDidMount() {
-        console.log('App componentDidMount');
-
-        const contacts = localStorage.getItem('contacts');
-        const parsedContacts = JSON.parse(contacts);
-
-        if (parsedContacts) {
-            console.log(parsedContacts);
-            this.setState({ contacts: parsedContacts });
-        };
-    };
-
-    // Фазы жизненного цикла
-    componentDidUpdate(prevProps, prevState) {
-        const { contacts } = this.state;
-
-        console.log('App componentDidUpdate');
-        // До обновления
-        console.log('prevState', prevState);
-        // После обновления
-        console.log('state', this.state);
-
-        if (contacts !== prevState.contacts) {
-            console.log('Обновилось поле контактов, записываю контакты в хранилище');
-
-            localStorage.setItem('contacts', JSON.stringify(contacts));
-        };
-    }
 
     render() {
         const { formSubmitHandler, changeFilter, deleteContact, getVisibleContacts } = this;
