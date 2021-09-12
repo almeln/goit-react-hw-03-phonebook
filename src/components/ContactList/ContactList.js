@@ -5,21 +5,6 @@ import css from './ContactList.module.css';
 import ContactItem from 'components/ContactItem';
 
 const ContactList = ({ contacts, onDeleteContact }) => (
-  // {
-  //   return (
-  //     <ul>
-  //       {contacts.map(contact => (
-  //         <ContactItem
-  //           key={contact.id}
-  //           id={contact.id}
-  //           name={contact.name}
-  //           number={contact.number}
-  //           onDeleteContact={onDeleteContact}
-  //         ></ContactItem>
-  //       ))}
-  //     </ul>
-  //   );
-  // };
   <ul>
     {contacts.map(({ id, name, number }) => (
       <li key={id} className={css.contactItem}>
@@ -34,8 +19,12 @@ const ContactList = ({ contacts, onDeleteContact }) => (
 );
 
 ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.shape).isRequired,
-  onDeleteContact: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  ).isRequired,
+  onDeleteContact: PropTypes.func,
 };
 
 export default ContactList;
