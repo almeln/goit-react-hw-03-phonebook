@@ -3,19 +3,30 @@ import PropTypes from 'prop-types';
 
 import css from './ContactItem.module.css';
 
-const ContactItem = ({ id, name, number, onDeleteContact }) => {
-  return (
-    <li className={css.contactItem}>
-      <p>
-        <span className={css.contactItemName}>{name}:</span>
-        <span className={css.contactItemNumber}>{number}</span>
-        <button className={css.deleteBtn} onClick={() => onDeleteContact(id)}>
-          Delete
-        </button>
-      </p>
-    </li>
-  );
-};
+const ContactItem = ({ name, number, onDelete }) => (
+  // {
+  //   return (
+  //     <li className={css.contactItem}>
+  //       <p>
+  //         <span className={css.contactItemName}>{name}:</span>
+  //         <span className={css.contactItemNumber}>{number}</span>
+  //         <button className={css.deleteBtn} onClick={() => onDeleteContact(id)}>
+  //           Delete
+  //         </button>
+  //       </p>
+  //     </li>
+  //   );
+  // };
+  <>
+    <p>
+      <span className={css.contactItemName}>{name}:</span>
+      <span className={css.contactItemNumber}>{number}</span>
+      <button type="button" className={css.deleteBtn} onClick={onDelete}>
+        Delete
+      </button>
+    </p>
+  </>
+);
 
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
