@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import toast, { Toaster } from 'react-hot-toast';
+
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Container from './Container';
@@ -60,7 +62,8 @@ class App extends Component {
         const doubleContact = this.state.contacts.find(contact => contact.name.toLowerCase() === data.name.toLowerCase());
         
         if (doubleContact) {
-            alert(`${data.name} is alredy in contacts.`);
+            // alert(`${data.name} is alredy in contacts.`);
+            toast.error(`${data.name} is alredy in contacts.`);
             return;
         };
 
@@ -102,14 +105,15 @@ class App extends Component {
 
         return (
             <Container>
-            <h1>Phonebook</h1>
-            <ContactForm onSubmit={formSubmitHandler}></ContactForm>
-            <h2>Contacts</h2>
-            <Filter value={this.state.filter} onChange={changeFilter}></Filter>
-            <ContactList 
-            contacts={visibleContacts}
-            onDeleteContact={deleteContact}
-            ></ContactList>
+                <Toaster/>
+                <h1>Phonebook</h1>
+                <ContactForm onSubmit={formSubmitHandler}></ContactForm>
+                <h2>Contacts</h2>
+                <Filter value={this.state.filter} onChange={changeFilter}></Filter>
+                <ContactList 
+                    contacts={visibleContacts}
+                    onDeleteContact={deleteContact}
+                ></ContactList>
             </Container>
         )
     }
